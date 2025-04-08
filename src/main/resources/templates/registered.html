@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head (titulo='Registered')"></head>
+<body class="container">
+<h1 class="my-5">Lista de usuarios registrados</h1>
+<table class="table table-striped my-5">
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.email}"></td>
+        <td><a th:href="@{/registered/{id}(id=${user.id})}">Detalles</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

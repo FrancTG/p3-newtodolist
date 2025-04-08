@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Bar</title>
+</head>
+<body>
+  <header th:fragment="menu-bar (id,nombre,userIsLoggedIn)">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">ToDoList App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li th:if="${userIsLoggedIn}" class="nav-item">
+            <a class="nav-link" th:href="@{/usuarios/{id}/tareas (id=${id})}">Tasks</a>
+          </li>
+        </ul>
+        <div th:if="${userIsLoggedIn}" class="dropdown">
+          <a th:text="${nombre}"  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/account">Account</a>
+            <a th:text="'Logout ' + ${nombre}" class="dropdown-item" href="/logout"></a>
+          </div>
+        </div>
+        <ul th:unless="${userIsLoggedIn}" class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">LogIn</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/registro">SignIn</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head (titulo='Acerca de')"></head>
+<body>
+<header th:replace="menu-bar :: menu-bar(id = ${user?.id},nombre = ${user?.nombre},userIsLoggedIn=${userIsLoggedIn})"></header>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <h1>ToDoList</h1>
+        <ul>
+            <li>Developed by Franc Tauste Gonzalez </li>
+            <li>Version 1.1.0</li>
+            <li>Release date: 03/25/2025</li>
+        </ul>
+    </div>
+</div>
+<div th:replace="fragments::javascript"/>
+</body>
+</html>

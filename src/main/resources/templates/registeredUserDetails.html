@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head (titulo='Registered User')"></head>
+<body class="container">
+<h1 class="my-5">Usuario registrado</h1>
+<table class="table table-striped my-5">
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Nombre</th>
+        <th>Fecha Nacimiento</th>
+    </tr>
+    <tr th:object="${user}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.nombre}"></td>
+        <td th:text="${user.fechaNacimiento}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
