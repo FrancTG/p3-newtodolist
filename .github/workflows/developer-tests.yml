@@ -9,6 +9,10 @@ jobs:
     steps:
       # Hacemos un checkout del código del repositorio
       - uses: actions/checkout@v1
+
+      # Instalamos Maven en Alpine
+      - name: Install Maven
+        run: apk add --no-cache maven
       # Y lanzamos los tests
       - name: Launch tests with Maven
-        run: ./mvn test
+        run: mvn test
