@@ -16,7 +16,7 @@ public class AboutPageTest {
     private MockMvc mockMvc;
 
     public void getAboutDevuelveNombreAplicacion() throws Exception {
-        this.mockMvc.perform(get("/about")).andExpect((ResultMatcher) content().string(containsString("+++++")));
+        this.mockMvc.perform(get("/about")).andExpect((ResultMatcher) content().string(containsString("ToDoList")));
     }
 
 }
