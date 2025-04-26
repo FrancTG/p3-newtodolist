@@ -11,6 +11,7 @@ jobs:
       postgres:
         # Imagen Docker Hub
         image: postgres:13
+        ports: ['5432:5432']git
         # Variables para arrancar PostgreSQL
         env:
           POSTGRES_USER: atsd
