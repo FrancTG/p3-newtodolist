@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_USER: atsd
           POSTGRES_PASSWORD: atsd
-          POSTGRES_DB: atsd_test
+          POSTGRES_DB: atsd
         # Definimos chequeos para esperar hasta que postgres ya ha comenzado
         options: >-
           --health-cmd pg_isready
@@ -25,9 +25,10 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v1
+      # Instalamos Maven en Alpine
+      - name: Install Maven
+        run: apk add --no-cache maven
       - name: Launch tests with Maven
-        run: |
-          chmod +x mvnw
-          ./mvnw test -D spring.profiles.active=postgres
+        run: mvn test -D spring.profiles.active=postgres
         env:
           POSTGRES_HOST: postgres
