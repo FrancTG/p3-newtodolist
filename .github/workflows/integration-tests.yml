@@ -28,6 +28,6 @@ jobs:
       - name: Install Maven
         run: apk add --no-cache maven
       - name: Launch tests with Maven
-        run: ./mvn test -D spring.profiles.active=postgres
+        run: mvn test -D spring.profiles.active=postgres
         env:
           POSTGRES_HOST: postgres
