@@ -22,6 +22,8 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        volumes:
+          - ./log-directory:/var/lib/postgresql/data
     steps:
       - uses: actions/checkout@v1
       - name: Install Maven
