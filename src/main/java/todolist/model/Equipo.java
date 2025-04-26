@@ -22,7 +22,15 @@ public class Equipo implements Serializable {
         this.nombre = nombre;
     }
 
+    public Equipo() {
+        this.nombre = "";
+    }
+
     public String getNombre() {
         return nombre;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
