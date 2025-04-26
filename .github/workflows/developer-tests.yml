@@ -1,4 +1,4 @@
-name: Tests
+name: Developer tests
 on: push
 jobs:
   # El nombre del job es launch-tests
