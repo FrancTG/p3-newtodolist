@@ -31,9 +31,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="9e167175-1c4c-40c4-9d71-12a5220e5428" object-ref="consoles/postgresql@localhost" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="9e167175-1c4c-40c4-9d71-12a5220e5428" />
