@@ -5,16 +5,16 @@ import todolist.dto.UsuarioData;
 import todolist.model.Equipo;
 import todolist.model.Usuario;
 import todolist.repository.EquipoRepository;
-import todolist.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import todolist.repository.UsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +26,7 @@ public class EquipoService {
     private ModelMapper modelMapper;
     @Autowired
     private UsuarioRepository usuarioRepository;
+
 
     // Se añade un equipo en la aplicación.
     // El nombre debe ser distinto de null
@@ -137,4 +138,3 @@ public class EquipoService {
         // con ello se guarda la relación
     }
 }
-
