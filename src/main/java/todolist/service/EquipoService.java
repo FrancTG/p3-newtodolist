@@ -150,7 +150,25 @@ public class EquipoService {
                 .map(equipo -> modelMapper.map(equipo, EquipoData.class))
                 .collect(Collectors.toList());
         return equipos;
+    }
 
+    @Transactional
+    public void borrarUsuarioDelEquipo(Long idEquipo, Long idUsuario) {
+        // recuperamos el equipo
+        Equipo equipo = equipoRepository.findById(idEquipo).orElse(null);
+        if (equipo == null) throw new EquipoServiceException("El equipo no existe");
+
+        // recuperamos el usuario
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
+        if (usuario == null) throw new EquipoServiceException("El usuario no existe");
+
+        // comprobamos que el usuario pertenece al equipo
+        if (!equipo.getUsuarios().contains(usuario))
+            throw new EquipoServiceException("El usuario no pertenece al equipo");
+
+        equipo.removeUsuario(usuario);
+        equipoRepository.save(equipo);
+        usuarioRepository.save(usuario);
     }
 }
 
