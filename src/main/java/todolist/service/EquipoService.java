@@ -136,6 +136,9 @@ public class EquipoService {
         List<UsuarioData> usuarios = equipo.getUsuarios().stream()
                 .map(usuario -> modelMapper.map(usuario, UsuarioData.class))
                 .collect(Collectors.toList());
+        if (usuarios.isEmpty()) {
+            throw new EquipoServiceException("El equipo no tiene usuarios");
+        }
         return usuarios;
     }
 
@@ -149,6 +152,10 @@ public class EquipoService {
         List<EquipoData> equipos = usuario.getEquipos().stream()
                 .map(equipo -> modelMapper.map(equipo, EquipoData.class))
                 .collect(Collectors.toList());
+
+        if (equipos.isEmpty()) {
+            throw new EquipoServiceException("El usuario no tiene equipos");
+        }
         return equipos;
     }
 
