@@ -1,0 +1,41 @@
+package todolist.controller;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
+import todolist.dto.EquipoData;
+import todolist.dto.UsuarioData;
+import todolist.service.EquipoService;
+import todolist.service.UsuarioService;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+public class EquipoPageTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    EquipoService equipoService;
+
+    @Autowired
+    UsuarioService usuarioService;
+
+    @Test
+    public void getEquiposDevuelveEquipo() throws Exception {
+        UsuarioData usuario = new UsuarioData();
+        usuario.setEmail("user@umh");
+        usuario.setPassword("1234");
+        usuario = usuarioService.registrar(usuario);
+        EquipoData equipo = equipoService.crearEquipo("Ejemplo 1");
+
+        this.mockMvc.perform(get("/usuarios/"+usuario.getId()+"/equipos")).andExpect((ResultMatcher) content().string(containsString("Ejemplo 1")));
+    }
+}
