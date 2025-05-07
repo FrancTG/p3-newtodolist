@@ -47,4 +47,17 @@ public class EquipoPageTest {
         usuario = usuarioService.registrar(usuario);
         this.mockMvc.perform(get("/usuarios/"+usuario.getId()+"/equipos/nuevo")).andExpect((ResultMatcher) content().string(containsString("Nuevo equipo")));
     }
+
+    @Test
+    public void usuarioEnEquipo() throws Exception {
+        UsuarioData usuario = new UsuarioData();
+        usuario.setEmail("user3@umh");
+        usuario.setNombre("user3");
+        usuario.setPassword("1234");
+        usuario = usuarioService.registrar(usuario);
+        EquipoData equipo = equipoService.crearEquipo("Ejemplo de equipo A");
+        equipoService.añadirUsuarioAEquipo(equipo.getId(),usuario.getId());
+
+        this.mockMvc.perform(get("/equipo/"+equipo.getId())).andExpect((ResultMatcher) content().string(containsString("Ejemplo de equipo A")));
+    }
 }
