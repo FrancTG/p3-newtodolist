@@ -11,9 +11,9 @@ import todolist.dto.UsuarioData;
 import todolist.service.EquipoService;
 import todolist.service.UsuarioService;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.hamcrest.Matchers.containsString;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -37,5 +37,14 @@ public class EquipoPageTest {
         EquipoData equipo = equipoService.crearEquipo("Ejemplo 1");
 
         this.mockMvc.perform(get("/usuarios/"+usuario.getId()+"/equipos")).andExpect((ResultMatcher) content().string(containsString("Ejemplo 1")));
+    }
+
+    @Test
+    public void nuevoEquipo() throws Exception {
+        UsuarioData usuario = new UsuarioData();
+        usuario.setEmail("user2@umh");
+        usuario.setPassword("1234");
+        usuario = usuarioService.registrar(usuario);
+        this.mockMvc.perform(get("/usuarios/"+usuario.getId()+"/equipos/nuevo")).andExpect((ResultMatcher) content().string(containsString("Nuevo equipo")));
     }
 }

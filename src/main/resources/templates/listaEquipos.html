@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: head (titulo='Login')"></head>
+<head th:replace="fragments :: head (titulo='Lista equipos')"></head>
 
 <body>
 
@@ -31,7 +31,7 @@
                 </tr>
                 </tbody>
             </table>
-            <p><a class="btn btn-primary" th:href="@{/equipos/nuevo}"> Nuevo equipo</a></p>
+            <p><a class="btn btn-primary" th:href="@{/usuarios/{id}/equipos/nuevo(id=${usuario.id})}">Nuevo equipo</a></p>
         </div>
     </div>
 </div>

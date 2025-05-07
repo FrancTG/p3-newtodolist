@@ -20,6 +20,9 @@
           <li th:if="${userIsLoggedIn}" class="nav-item">
             <a class="nav-link" th:href="@{/usuarios/{id}/tareas (id=${id})}">Tasks</a>
           </li>
+          <li>
+            <a class="nav-link" th:href="@{/usuarios/{id}/equipos (id=${id})}">Teams</a>
+          </li>
         </ul>
         <div th:if="${userIsLoggedIn}" class="dropdown">
           <a th:text="${nombre}"  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
