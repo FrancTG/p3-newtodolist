@@ -30,9 +30,6 @@ public class EquipoController {
     @Autowired
     EquipoService equipoService;
 
-
-
-
     @GetMapping("/usuarios/{id}/equipos")
     public String listarEquipos(@PathVariable(value="id") Long idUsuario,Model model) {
         UsuarioData usuario = usuarioService.findById(idUsuario);
@@ -64,19 +61,60 @@ public class EquipoController {
         return "redirect:/usuarios/" + idUsuario + "/equipos";
     }
 
-    @GetMapping("/equipo/{id}")
-    public String verUsuariosEquipo(@PathVariable(value="id") Long idEquipo,
+    @GetMapping("/usuarios/{idUser}/equipo/{idTeam}")
+    public String verUsuariosEquipo(@PathVariable(value="idUser") Long idUsuario,
+                                    @PathVariable(value="idTeam") Long idEquipo,
                                  @ModelAttribute EquipoData equipoData, Model model,
                                  HttpSession session) {
         List<UsuarioData> usuarios = new ArrayList<UsuarioData>();
+        boolean userIsOnTeam = false;
         try {
             usuarios = equipoService.usuariosEquipo(idEquipo);
+
+            for (EquipoData currEquipo : equipoService.equiposUsuario(idUsuario)) {
+                if (currEquipo.getId().equals(idEquipo)) {
+                    userIsOnTeam = true;
+                    break;
+                }
+            }
         } catch (EquipoServiceException ex) {
             System.out.println("No existen usuarios en el equipo");
         }
+
+
         EquipoData equipo = equipoService.recuperarEquipo(idEquipo);
+        model.addAttribute("idUsuario",idUsuario);
         model.addAttribute("usuarios", usuarios);
-        model.addAttribute("equipo",equipo.getNombre());
+        model.addAttribute("equipo",equipo);
+        model.addAttribute("userIsOnTeam",userIsOnTeam);
         return "listarUsuarioEquipo";
+    }
+
+    @GetMapping("/usuarios/{idUser}/equipos/{idTeam}/join")
+    public String entrarEnElEquipo(@PathVariable(value="idUser") Long idUsuario,
+                                 @PathVariable(value="idTeam") Long idEquipo,
+                                 @ModelAttribute EquipoData equipoData, Model model,
+                                 HttpSession session) {
+        try {
+            equipoService.añadirUsuarioAEquipo(idEquipo,idUsuario);
+        } catch (EquipoServiceException ex) {
+            System.out.println("El usuario ya pertenece al equipo");
+        }
+
+        return "redirect:/usuarios/" + idUsuario + "/equipo/" + idEquipo;
+    }
+
+    @GetMapping("/usuarios/{idUser}/equipos/{idTeam}/leave")
+    public String salirDelEquipo(@PathVariable(value="idUser") Long idUsuario,
+                                   @PathVariable(value="idTeam") Long idEquipo,
+                                   @ModelAttribute EquipoData equipoData, Model model,
+                                   HttpSession session) {
+        try {
+            equipoService.borrarUsuarioDelEquipo(idEquipo,idUsuario);
+        } catch(EquipoServiceException ex) {
+            System.out.println("El usuario no pertenece al equipo ");
+        }
+
+        return "redirect:/usuarios/" + idUsuario + "/equipo/"+idEquipo;
     }
 }

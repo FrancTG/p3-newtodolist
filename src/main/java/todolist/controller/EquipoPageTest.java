@@ -12,8 +12,10 @@ import todolist.service.EquipoService;
 import todolist.service.UsuarioService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -58,6 +60,40 @@ public class EquipoPageTest {
         EquipoData equipo = equipoService.crearEquipo("Ejemplo de equipo A");
         equipoService.añadirUsuarioAEquipo(equipo.getId(),usuario.getId());
 
-        this.mockMvc.perform(get("/equipo/"+equipo.getId())).andExpect((ResultMatcher) content().string(containsString("Ejemplo de equipo A")));
+        this.mockMvc.perform(get("/usuarios/"+usuario.getId()+"/equipo/"+equipo.getId())).andExpect((ResultMatcher) content().string(containsString("Ejemplo de equipo A")));
+    }
+
+    @Test
+    public void usuarioEntraEquipo() throws Exception {
+        UsuarioData usuario = new UsuarioData();
+        usuario.setEmail("user3@umh");
+        usuario.setNombre("user3");
+        usuario.setPassword("1234");
+        usuario = usuarioService.registrar(usuario);
+        UsuarioData usuario2 = new UsuarioData();
+        usuario2.setEmail("user4@umh");
+        usuario2.setNombre("user4");
+        usuario2.setPassword("1234");
+        usuario2 = usuarioService.registrar(usuario2);
+
+        EquipoData equipo = equipoService.crearEquipo("Ejemplo de equipo A");
+
+        // Entra el primer usuario al equipo
+        this.mockMvc.perform(get("/usuarios/"+usuario.getId()+"/equipos/"+equipo.getId()+"/join"))
+                .andExpect(status().is3xxRedirection());
+        // Entra el segundo usuario
+        this.mockMvc.perform(get("/usuarios/"+usuario2.getId()+"/equipos/"+equipo.getId()+"/join"))
+                .andExpect(status().is3xxRedirection());
+        // Comprueba si existe en la página
+        this.mockMvc.perform(get("/usuarios/" + usuario.getId() + "/equipo/" + equipo.getId()))
+                .andExpect(content().string(containsString("user3")));
+
+        // Sale el primero usuario del equipo
+        this.mockMvc.perform(get("/usuarios/"+usuario.getId()+"/equipos/"+equipo.getId()+"/leave"))
+                .andExpect(status().is3xxRedirection());
+
+        // Comprueba si todavia está el segundo usuario en el equipo
+        this.mockMvc.perform(get("/usuarios/" + usuario.getId() + "/equipo/" + equipo.getId()))
+                .andExpect(content().string(containsString("user4")));
     }
 }

@@ -27,7 +27,7 @@
                 <tr th:each="equipo: ${equipos}">
                     <td th:text="${equipo.id}"></td>
                     <td th:text="${equipo.nombre}"></td>
-                    <td><a class="btn btn-primary btn-xs" th:href="@{/equipo/{id}(id=${equipo.id})}"/>Ver</a></td>
+                    <td><a class="btn btn-primary btn-xs" th:href="@{/usuarios/{idUser}/equipo/{idTeam}(idUser=${usuario.id},idTeam=${equipo.id})}"/>Ver</a></td>
                 </tr>
                 </tbody>
             </table>
