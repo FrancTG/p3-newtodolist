@@ -64,8 +64,11 @@ public class Equipo implements Serializable {
         usuario.getEquipos().add(this);
     }
 
-    // equals para el tercer test
-    // que aparece en la prácitca
+
+    public void removeUsuario(Usuario usuario) {
+        this.getUsuarios().remove(usuario);
+        usuario.getEquipos().remove(this);
+    }
 
     @Override
     public boolean equals(Object o) {
