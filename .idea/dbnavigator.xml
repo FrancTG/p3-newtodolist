@@ -11,6 +11,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
+      <assistant-state connection-id="4d836544-00eb-4565-8d5b-7e1330fe0057" default-profile-name="" selected-profile-name="" selected-model-name="" assistant-type="GENERIC" selected-action="SHOW_SQL" availability="UNAVAILABLE" acknowledgement="NONE">
+        <messages />
+      </assistant-state>
       <assistant-state connection-id="9e167175-1c4c-40c4-9d71-12a5220e5428" default-profile-name="" selected-profile-name="" selected-model-name="" assistant-type="GENERIC" selected-action="SHOW_SQL" availability="UNAVAILABLE" acknowledgement="NONE">
         <messages />
       </assistant-state>
@@ -27,22 +30,21 @@
       <console name="postgresql@localhost" type="STANDARD" schema="public" session="Main"><![CDATA[select * from usuarios;]]></console>
     </connection>
     <connection id="4d836544-00eb-4565-8d5b-7e1330fe0057">
-      <console name="Connection" type="STANDARD" schema="postgres" session="Main" />
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from usuarios;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="9e167175-1c4c-40c4-9d71-12a5220e5428" object-ref="consoles/postgresql@localhost" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="9e167175-1c4c-40c4-9d71-12a5220e5428" />
     <connection id="4d836544-00eb-4565-8d5b-7e1330fe0057" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="4d836544-00eb-4565-8d5b-7e1330fe0057" dataset="public.usuarios" active-filter-id="" />
     <filter-actions connection-id="9e167175-1c4c-40c4-9d71-12a5220e5428" dataset="public.usuarios" active-filter-id="d7646a34-e809-4992-8205-252167a13c13">
       <filter id="d7646a34-e809-4992-8205-252167a13c13" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="=" value="" active="true" />
@@ -52,6 +54,14 @@
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <execution-variables-cache />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
@@ -173,7 +183,7 @@
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="5432" />
-          <database value="postgres" />
+          <database value="atsd" />
           <tns-folder value="" />
           <tns-profile value="" />
           <type value="USER_PASSWORD" />
