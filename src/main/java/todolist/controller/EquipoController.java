@@ -117,4 +117,10 @@ public class EquipoController {
 
         return "redirect:/usuarios/" + idUsuario + "/equipo/"+idEquipo;
     }
+    @GetMapping("/borrarequipo/{idTeam}")
+    public String borrarEquipo(@PathVariable(value="idTeam") Long idEquipo) {
+
+        equipoService.borrarEquipo(idEquipo);
+        return "redirect:/login";
+    }
 }

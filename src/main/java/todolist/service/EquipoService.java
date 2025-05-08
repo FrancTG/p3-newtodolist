@@ -27,6 +27,11 @@ public class EquipoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Transactional
+    public void borrarEquipo(Long id) {
+        equipoRepository.deleteById(id);
+    }
+
     // Se añade un equipo en la aplicación.
     // El nombre debe ser distinto de null
     // El nombre no debe estar registrado en la base de datos
